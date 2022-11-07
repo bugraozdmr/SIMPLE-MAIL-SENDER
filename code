@@ -1,0 +1,26 @@
+from smtplib import SMTP
+
+
+#smtp
+#this library using for sending simple mails
+try:
+    #mail message info
+    subject = "test"
+    message = "bu bir test mesajıdır"
+    content = "Subject: {0}\n\n{1}".format(subject,message)
+
+    #gönderici hesap bilgileri
+    mymail = "your mail adress"     #this mail is sender.
+    password = "your google application password"        #you can get this password from https://support.google.com/accounts/answer/185833?hl=tr !!
+
+    #who will get this mail .
+    sentto = input("who is going to take ? :")
+
+    mail = SMTP("smtp.gmail.com",587)   #google smtp 
+    mail.ehlo()  #connected to mail
+    mail.starttls() #our message is encrypted
+    mail.login(mymail,password)
+    mail.sendmail(mymail,sentto,content.encode("utf-8"))  #encode for faultless texts
+    print("Mail sent !")
+except Exception as e:
+    print("ERROR !\n {}".format(e))
